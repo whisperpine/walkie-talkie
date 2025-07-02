@@ -25,7 +25,7 @@ services:
       cloudflared:
       postgres:
     environment:
-      RUST_LOG: debug # trace, debug, info, warn, error.
+      RUST_LOG: wt_websocket=debug # trace, debug, info, warn, error.
 
   wt-rest-api:
     init: true # Terminate container immediately when pressing `ctrl-c`.
@@ -41,7 +41,7 @@ services:
       cloudflared:
       postgres:
     environment:
-      RUST_LOG: debug # trace, debug, info, warn, error.
+      RUST_LOG: wt_rest_api=debug # trace, debug, info, warn, error.
 
   postgres:
     image: postgres:17.4

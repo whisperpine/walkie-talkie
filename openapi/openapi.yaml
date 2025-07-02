@@ -11,8 +11,8 @@ info:
 tags:
   - name: Echo
     description: Example echo operations
-  # - name: Users
-  #   description: Operations related to users
+  - name: Users
+    description: Operations related to users
   - name: Channels
     description: Operations related to channels
 security: []

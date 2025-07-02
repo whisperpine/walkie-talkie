@@ -19,7 +19,10 @@ async fn main() {
         .route("/", axum::routing::get(websocket_handler))
         .with_state(state);
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    let addr = std::net::SocketAddr::from(([0, 0, 0, 0], 3000));
+    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+    tracing::info!("listening at http://localhost:{}", addr.port());
+
     axum::serve(listener, app).await.unwrap();
 }
 

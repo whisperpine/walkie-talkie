@@ -41,12 +41,12 @@ preview:
 
 # run backend wt-websocket in debug mode
 websocket:
-    RUST_LOG=debug \
+    RUST_LOG="wt_websocket=debug" \
     cargo run -p wt-websocket
 
 # run backend wt-rest-api in debug mode
 rest-api:
-    RUST_LOG=debug \
+    RUST_LOG="wt_rest_api=debug" \
     cargo run -p wt-rest-api
 
 # build the docker image for wt-websocket
