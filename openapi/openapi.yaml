@@ -1,0 +1,36 @@
+openapi: 3.1.1
+info:
+  title: API for whisperpine/walkie-talkie project
+  description: API for whisperpine/walkie-talkie repository on GitHub
+  version: 0.1.0-alpha
+  contact:
+    email: yusonglai64@gmail.com
+  license:
+    name: Apache 2.0
+    identifier: Apache-2.0
+tags:
+  - name: Echo
+    description: Example echo operations
+  # - name: Users
+  #   description: Operations related to users
+  - name: Channels
+    description: Operations related to channels
+security: []
+servers:
+  - url: https://wtapi.yusong.me
+    description: Walkie Talkie REST API server
+components:
+  schemas:
+    User:
+      $ref: "./components/schemas/user.yaml"
+    Channel:
+      $ref: "./components/schemas/channel.yaml"
+paths:
+  /echo:
+    $ref: "./paths/echo.yaml"
+  /users:
+    $ref: "./paths/users.yaml"
+  /users/{user_id}:
+    $ref: "./paths/users-{user_id}.yaml"
+  /channels:
+    $ref: "./paths/channels.yaml"

@@ -1,4 +1,24 @@
 # ======================================
+# OpenAPI
+# ======================================
+
+# lint OpenAPI Specifications
+lint:
+    redocly lint ./openapi/openapi.yaml
+
+# generate API documentation as an HTML file
+doc:
+    sh ./scripts/build-docs.sh
+
+# run OpenAPI contract tests by Arazzo
+arazzo:
+    # generate test workflows from the openapi spec
+    redocly generate-arazzo ./openapi/openapi.yaml -o gen.arazzo.yaml
+    # run contract tests against the api server
+    redocly respect gen.arazzo.yaml --verbose
+
+
+# ======================================
 # Frontend
 # ======================================
 
@@ -18,6 +38,7 @@ preview:
 
 # run backend wt-websocket in debug mode
 run:
+    RUST_LOG=debug \
     cargo run -p wt-websocket
 
 # build the docker image for the local machine's platform

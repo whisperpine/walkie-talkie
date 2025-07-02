@@ -1,0 +1,15 @@
+get:
+  tags: [Channels]
+  summary: List all channels
+  operationId: listChannels
+  responses:
+    "404":
+      description: Channels not found
+    "200":
+      description: Successful response with list of users
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../openapi.yaml/#/components/schemas/Channel"

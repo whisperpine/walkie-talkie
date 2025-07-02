@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+type: object
+required:
+  - channel_id
+properties:
+  channel_id:
+    type: integer
+    example: 123
+  channel_name:
+    type: string
+    example: channel_123

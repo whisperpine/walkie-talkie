@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+type: object
+required:
+  - user_id
+  - user_name
+properties:
+  user_id:
+    type: string
+    format: uuid
+    example: bad633b3-fade-48ff-98c3-8243f46b4122
+  user_name:
+    type: string
+    example: Amiao
