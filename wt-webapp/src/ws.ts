@@ -19,7 +19,7 @@ function getRandomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-ws.onmessage = (event: MessageEvent<any>): void => {
+ws.onmessage = (event): void => {
   console.log("Received:", event.data);
 };
 
@@ -27,7 +27,7 @@ function sendMessage(): void {
   ws.send(
     JSON.stringify({
       channel: "ward",
-      sender: "nurse" + nurseNumber,
+      sender: `nurse_${nurseNumber}`,
       payload: generateRandomSentence(),
     }),
   );

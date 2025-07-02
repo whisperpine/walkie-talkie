@@ -1,0 +1,13 @@
+{
+  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
+  "files": {
+    "includes": [
+      "./wt-webapp/src/**",
+      "!./wt-webapp/node_modules/**",
+      "!./wt-webapp/dist/**"
+    ]
+  },
+  "linter": {
+    // noNonNullAssertion
+  }
+}
