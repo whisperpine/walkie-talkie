@@ -53,14 +53,14 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "default" {
     ingress = [
       {
         hostname = "${cloudflare_dns_record.wtws.name}.${var.cloudflare_zone}"
-        service  = "http://wt-websocket"
+        service  = "ws://wt-websocket:3000"
         origin_request = {
           no_tls_verify = true
         }
       },
       {
         hostname = "${cloudflare_dns_record.wtapi.name}.${var.cloudflare_zone}"
-        service  = "http://wt-rest-api"
+        service  = "http://wt-rest-api:8080"
         origin_request = {
           no_tls_verify = true
         }
