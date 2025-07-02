@@ -1,0 +1,55 @@
+networks:
+  cloudflared:
+  postgres:
+
+services:
+  cloudflared:
+    image: cloudflare/cloudflared
+    restart: unless-stopped
+    networks:
+      cloudflared:
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARED_TOKEN}
+
+  wt-websocket:
+    init: true # Terminate container immediately when pressing `ctrl-c`.
+    # image: wt-websocket
+    # image: ghcr.io/whisperpine/wt-websocket:xxxxxxx
+    image: ghcr.io/whisperpine/wt-websocket:latest
+    pull_policy: always
+    restart: unless-stopped
+    depends_on:
+      - cloudflared
+      - wt-rest-api
+      - postgres
+    networks:
+      cloudflared:
+      postgres:
+    environment:
+      RUST_LOG: debug # trace, debug, info, warn, error.
+
+  wt-rest-api:
+    init: true # Terminate container immediately when pressing `ctrl-c`.
+    # image: wt-rest-api
+    # image: ghcr.io/whisperpine/wt-rest-api:xxxxxxx
+    image: ghcr.io/whisperpine/wt-rest-api:latest
+    pull_policy: always
+    restart: unless-stopped
+    depends_on:
+      - cloudflared
+      - postgres
+    networks:
+      cloudflared:
+      postgres:
+    environment:
+      RUST_LOG: debug # trace, debug, info, warn, error.
+
+  postgres:
+    image: postgres:17.4
+    shm_size: 128mb
+    restart: unless-stopped
+    # volumes: # Deliberately choose temporary storage.
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      PGPORT: ${PGPORT}
+      POSTGRES_DB: ${PGDATABASE}

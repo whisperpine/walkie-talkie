@@ -62,3 +62,20 @@ build-api:
         -t wt-rest-api \
         -f ./wtapi.Dockerfile \
         .
+
+
+# ======================================
+# Deployment
+# ======================================
+
+# spin up the services, make it publicly available
+spinup:
+    docker compose \
+        --file ./prod.compose.yaml \
+        up -d
+
+# spin down the services, make it publicly unavailable
+spindown:
+    docker compose \
+        --file ./prod.compose.yaml \
+        down
