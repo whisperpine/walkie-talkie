@@ -18,7 +18,7 @@ async fn main() {
     };
 
     let app = axum::Router::new()
-        .route("/ws", get(websocket_handler))
+        .route("/", get(websocket_handler))
         .with_state(state);
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();

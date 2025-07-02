@@ -1,6 +1,12 @@
-const ws = new WebSocket("ws://localhost:3000/ws");
+const VITE_WEBSOCKET_API_ENDPOINT = import.meta.env
+  .VITE_WEBSOCKET_API_ENDPOINT as string;
+console.log(`websocket api endpoint: "${VITE_WEBSOCKET_API_ENDPOINT}"`);
 
-const nurseNumber = getRandomInt(1, 100);
+const ws = new WebSocket(VITE_WEBSOCKET_API_ENDPOINT);
+
+ws.onmessage = (event): void => {
+  console.log("Received:", event.data);
+};
 
 // ws.onopen = (): void => { };
 
@@ -19,10 +25,7 @@ function getRandomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-ws.onmessage = (event): void => {
-  console.log("Received:", event.data);
-};
-
+const nurseNumber = getRandomInt(1, 100);
 function sendMessage(): void {
   ws.send(
     JSON.stringify({
