@@ -62,7 +62,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: . # Path to dockerfile (current directory).
-          file: wtws.Dockerfile # Path to the Dockerfile.
+          file: wtapi.Dockerfile # Path to the Dockerfile.
           push: true # Push to registry.
           tags: |
             ghcr.io/${{ github.repository_owner }}/wt-rest-api:latest
