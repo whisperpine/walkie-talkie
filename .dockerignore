@@ -33,7 +33,7 @@
 /.husky
 /scripts
 /openapi
-/pages
+/gh-pages
 /wt-webapp
 .envrc
 LICENSE
