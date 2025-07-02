@@ -8,7 +8,7 @@ DON'T modify files manually under this directory,
 except for files listed in [.openapi-generator-ignore](./.openapi-generator-ignore).
 If it's intended, modify OpenAPI Specifications under
 [openapi](../openapi/) directory or [gen-rust-axum.sh](../scripts/gen-rust-axum.sh)
-script, then run `just gen` command to generate this package again.
+script, then run `just gen-axum` command to generate this package again.
 
 ## Feature Flags
 

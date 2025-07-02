@@ -18,7 +18,7 @@ arazzo:
     redocly respect gen.arazzo.yaml --verbose
 
 # generate server stubs with rust-axum generator
-gen:
+gen-axum:
     sh ./scripts/gen-rust-axum.sh
 
 # ======================================
@@ -44,8 +44,8 @@ run:
     RUST_LOG=debug \
     cargo run -p wt-websocket
 
-# build the docker image for the local machine's platform
-build:
+# build the docker image for wt-websocket
+build-wt:
     docker build \
         -t wt-websocket \
         -f ./wtws.Dockerfile \
