@@ -7,14 +7,13 @@
     <script type="module" src="/src/main.ts" defer></script>
     <title>Walkie Talkie</title>
   </head>
-  <body class="min-h-screen text-gray-100 bg-gray-800">
+  <body class="flex flex-col min-h-screen text-gray-100 bg-gray-800">
     <!-- Navigation Bar -->
     <nav class="bg-gray-800 shadow-lg">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <!-- no logo -->
-            <span class="text-2xl font-bold"></span>
+            <span class="text-2xl font-bold">Walkie Talkie</span>
           </div>
           <div class="hidden space-x-4 sm:flex sm:items-center">
             <a href="#" class="hover:text-blue-400">Home</a>
@@ -45,41 +44,45 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="py-20 bg-gray-800">
-      <div class="px-4 mx-auto max-w-7xl text-center sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-extrabold tracking-tight md:text-5xl">
-          Walkie Talkie
-        </h1>
-        <p class="mt-4 text-lg text-gray-400">
-          Join a channel. Talk to others!
-        </p>
-        <!-- <a -->
-        <!--   href="#" -->
-        <!--   class="inline-block py-3 px-6 mt-6 text-white bg-blue-600 rounded-lg transition hover:bg-blue-700" -->
-        <!-- >Get Started</a> -->
+    <!-- Chat Messages Section -->
+    <section
+      id="message-area"
+      class="overflow-y-auto flex-1 py-4 px-4 mx-auto sm:px-6 lg:px-8 max-w-10xl"
+    >
+      <div id="chat-container" class="space-y-4">
+        <!-- <div class="flex justify-end"> -->
+        <!--   <div class="p-3 max-w-xs text-white bg-blue-600 rounded-lg"> -->
+        <!--     Example Message (Sender) -->
+        <!--   </div> -->
+        <!-- </div> -->
+        <!-- <div class="flex justify-start"> -->
+        <!--   <div class="p-3 max-w-xs text-gray-100 bg-gray-700 rounded-lg"> -->
+        <!--     Example Message (Receiver) -->
+        <!--   </div> -->
+        <!-- </div> -->
       </div>
     </section>
 
-    <!-- Contact Form -->
-    <section class="py-16 bg-gray-800">
+    <!-- Contact Form (Sticky Bottom) -->
+    <section class="sticky bottom-0 py-4 bg-gray-800 border-t border-gray-700">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <form class="mx-auto space-y-6 max-w-lg">
+        <form id="message-form" class="mx-auto space-y-4 max-w-lg">
           <div>
-            <label for="message" class="block text-sm font-medium text-gray-400"
-            >Message</label>
+            <label for="message" class="sr-only">Message</label>
             <textarea
               id="message"
-              rows="3"
-              class="p-3 mt-1 w-full bg-gray-700 rounded-lg border border-gray-600 resize-none focus:border-blue-500 focus:ring-blue-500"
-              placeholder="Your Message"
+              name="message"
+              rows="2"
+              class="p-3 w-full bg-gray-700 rounded-lg border border-gray-600 resize-none focus:border-blue-500 focus:ring-blue-500"
+              placeholder="Type your message..."
+              required
             ></textarea>
           </div>
           <button
             type="submit"
-            class="py-3 px-6 w-full text-white bg-blue-600 rounded-lg transition hover:bg-blue-700"
+            class="py-2 px-6 w-full text-white bg-blue-600 rounded-lg transition hover:bg-blue-700"
           >
-            Send Message
+            Send
           </button>
         </form>
       </div>
