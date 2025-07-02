@@ -1,0 +1,6 @@
+[default]
+extend-ignore-re = ["cloudflare_token.*", "CLOUDFLARED_TOKEN=.*"]
+
+[default.extend-words]
+sever = "server"
+subs = "stubs"
