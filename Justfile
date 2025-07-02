@@ -50,3 +50,10 @@ build-wt:
         -t wt-websocket \
         -f ./wtws.Dockerfile \
         .
+
+# build the docker image for wt-rest-api
+build-api:
+    docker build \
+        -t wt-rest-api \
+        -f ./wtapi.Dockerfile \
+        .
