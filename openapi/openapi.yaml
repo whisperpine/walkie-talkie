@@ -17,6 +17,8 @@ tags:
     description: Operations related to channels
 security: []
 servers:
+  - url: http://localhost:8080
+    description: Local development server
   - url: https://wtapi.yusong.me
     description: Walkie Talkie REST API server
 components:
