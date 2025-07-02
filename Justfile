@@ -21,6 +21,10 @@ arazzo:
 gen-axum:
     sh ./scripts/gen-rust-axum.sh
 
+# generate typescript client sdk
+gen-ts:
+    sh ./scripts/gen-typescript.sh
+
 # ======================================
 # Frontend
 # ======================================

@@ -1,0 +1,12 @@
+# Configurations that meant to be used by openapi-generator-cli.
+
+generatorName: typescript-fetch # -g, --generator
+inputSpec: ./openapi/bundled.yaml # -i, --input
+
+# # See the template mustache file:
+# # https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/resources/rust-axum/Cargo.mustache
+# additionalProperties:
+#   npmName: wt-webapp-sdk
+#   gitUserId: whisperpine
+#   gitRepoId: walkie-talkie
+#   packageAsSourceOnlyLibrary: true

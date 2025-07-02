@@ -1,0 +1,13 @@
+.gitignore
+.npmignore
+package.json
+src/apis/ChannelsApi.ts
+src/apis/EchoApi.ts
+src/apis/UsersApi.ts
+src/apis/index.ts
+src/index.ts
+src/models/Channel.ts
+src/models/User.ts
+src/models/index.ts
+src/runtime.ts
+tsconfig.json

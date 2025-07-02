@@ -1,0 +1,15 @@
+{
+  "name": "wt-webapp-sdk",
+  "version": "0.1.0-alpha",
+  "description": "OpenAPI client for wt-webapp-sdk",
+  "author": "OpenAPI-Generator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
+  },
+  "main": "./index.ts",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^4.0 || ^5.0"
+  }
+}
