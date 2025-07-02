@@ -1,6 +1,4 @@
 import "./style.css";
-import typescriptLogo from "./typescript.svg";
-import viteLogo from "/vite.svg";
 import { setupCounter } from "./counter.ts";
 import { setupSendButton } from "./ws.ts";
 
@@ -11,12 +9,6 @@ if (app != null) {
     Walkie Talkie
   </h1>
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" alt="TypeScript logo" />
-    </a>
     <button id="counter" type="button" class="rounded-2xl shadow-sm"></button>
     
     <button id="send-message" type="button" class="rounded-2xl shadow-sm">send message</button>

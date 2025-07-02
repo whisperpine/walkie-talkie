@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -7,7 +7,82 @@
     <script type="module" src="/src/main.ts" defer></script>
     <title>Walkie Talkie</title>
   </head>
-  <body>
-    <div id="app"></div>
+  <body class="min-h-screen text-gray-100 bg-gray-800">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 shadow-lg">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <!-- no logo -->
+            <span class="text-2xl font-bold"></span>
+          </div>
+          <div class="hidden space-x-4 sm:flex sm:items-center">
+            <a href="#" class="hover:text-blue-400">Home</a>
+            <a
+              href="https://github.com/whisperpine/walkie-talkie"
+              target="_blank"
+              class="hover:text-blue-400"
+            >GitHub</a>
+          </div>
+          <div class="flex items-center sm:hidden">
+            <button class="text-gray-400 hover:text-white focus:outline-none">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl text-center sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-extrabold tracking-tight md:text-5xl">
+          Walkie Talkie
+        </h1>
+        <p class="mt-4 text-lg text-gray-400">
+          Join a channel. Talk to others!
+        </p>
+        <!-- <a -->
+        <!--   href="#" -->
+        <!--   class="inline-block py-3 px-6 mt-6 text-white bg-blue-600 rounded-lg transition hover:bg-blue-700" -->
+        <!-- >Get Started</a> -->
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-16 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <form class="mx-auto space-y-6 max-w-lg">
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-400"
+            >Message</label>
+            <textarea
+              id="message"
+              rows="3"
+              class="p-3 mt-1 w-full bg-gray-700 rounded-lg border border-gray-600 resize-none focus:border-blue-500 focus:ring-blue-500"
+              placeholder="Your Message"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="py-3 px-6 w-full text-white bg-blue-600 rounded-lg transition hover:bg-blue-700"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
   </body>
 </html>
