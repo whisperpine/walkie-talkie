@@ -17,6 +17,9 @@ arazzo:
     # run contract tests against the api server
     redocly respect gen.arazzo.yaml --verbose
 
+# generate server stubs with rust-axum generator
+gen:
+    sh ./scripts/gen-rust-axum.sh
 
 # ======================================
 # Frontend

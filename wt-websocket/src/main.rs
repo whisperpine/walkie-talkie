@@ -9,8 +9,6 @@ use tracing::info;
 
 #[tokio::main]
 async fn main() {
-    use axum::routing::get;
-
     tracing_subscriber::fmt::init();
 
     let state = AppState {
@@ -18,7 +16,7 @@ async fn main() {
     };
 
     let app = axum::Router::new()
-        .route("/", get(websocket_handler))
+        .route("/", axum::routing::get(websocket_handler))
         .with_state(state);
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
@@ -43,7 +41,6 @@ async fn websocket_handler(
     axum::extract::State(state): axum::extract::State<AppState>,
 ) -> axum::response::Response {
     ws.on_upgrade(|socket| handle_socket(socket, state))
-    // todo!()
 }
 
 async fn handle_socket(mut socket: WebSocket, state: AppState) {
