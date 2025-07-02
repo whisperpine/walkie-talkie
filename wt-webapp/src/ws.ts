@@ -34,7 +34,7 @@ function getRandomInt(min: number, max: number): number {
 
 const nurseNumber = getRandomInt(1, 1000);
 
-export function sendMsg(payload: string): void {
+export function sendMessage(payload: string): void {
   ws.send(
     JSON.stringify({
       channel: "ward",
