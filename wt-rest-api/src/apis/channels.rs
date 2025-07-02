@@ -11,9 +11,9 @@ impl wt_rest_stubs::apis::channels::Channels<crate::Error> for crate::ServerImpl
     /// ListChannels - GET /channels
     async fn list_channels(
         &self,
-        method: &Method,
-        host: &Host,
-        cookies: &CookieJar,
+        _method: &Method,
+        _host: &Host,
+        _cookies: &CookieJar,
     ) -> crate::Result<ListChannelsResponse> {
         // todo
         tracing::warn!(

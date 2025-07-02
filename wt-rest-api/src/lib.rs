@@ -3,7 +3,7 @@
 //! This crate provides the core HTTP server functionality for the tt project.
 
 // rustc
-#![cfg_attr(debug_assertions, allow(unused))]
+// #![cfg_attr(debug_assertions, allow(unused))]
 #![cfg_attr(not(debug_assertions), deny(missing_docs))]
 #![cfg_attr(not(debug_assertions), deny(clippy::unwrap_used))]
 #![cfg_attr(not(debug_assertions), deny(warnings))]
@@ -23,6 +23,6 @@ mod server;
 pub use config::{CRATE_NAME, PKG_VERSION};
 pub use server::start_server;
 
-pub(crate) use db::connection_pool;
+// pub(crate) use db::connection_pool;
 pub(crate) use error::{Error, Result};
 pub(crate) use server::ServerImpl;
