@@ -64,3 +64,13 @@ jobs:
       - name: Run biome lint command
         shell: nix shell nixpkgs#tflint --quiet --command bash {0}
         run: tflint --chdir ./infra --recursive
+
+  redocly-lint:
+    runs-on: ubuntu-latest
+    name: lint openapi specifications
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Run biome lint command
+        shell: nix shell nixpkgs#redocly --quiet --command bash {0}
+        run: redocly lint ./openapi/openapi.yaml
