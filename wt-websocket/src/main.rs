@@ -20,10 +20,18 @@ async fn main() {
         .with_state(state);
 
     let addr = std::net::SocketAddr::from(([0, 0, 0, 0], 3000));
-    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+    let listener = tokio::net::TcpListener::bind(addr)
+        .await
+        .unwrap_or_else(|e| {
+            tracing::error!("{e}");
+            panic!("failed to bind SocketAddr: {addr}")
+        });
     tracing::info!("listening at http://localhost:{}", addr.port());
 
-    axum::serve(listener, app).await.unwrap();
+    axum::serve(listener, app).await.unwrap_or_else(|e| {
+        tracing::error!("{e}");
+        panic!("failed to start axum server")
+    });
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -79,8 +87,9 @@ async fn handle_socket(mut socket: WebSocket, state: AppState) {
                 serde_json::to_string(&WalkieTalkieMessage {
                     channel: channel_name.clone(),
                     sender: "system".to_owned(),
-                    payload: format!("Connected to channel {channel_name}"),
+                    payload: format!("Connected to channel: {channel_name}"),
                 })
+                .inspect_err(|e| tracing::error!("{e}"))
                 .unwrap()
                 .into(),
             ))
@@ -113,7 +122,10 @@ async fn handle_socket(mut socket: WebSocket, state: AppState) {
             if message.channel == channel_name && message.sender != sender {
                 let _ = ws_sink
                     .send(axum::extract::ws::Message::Text(
-                        serde_json::to_string(&message).unwrap().into(),
+                        serde_json::to_string(&message)
+                            .inspect_err(|e| tracing::error!("{e}"))
+                            .unwrap()
+                            .into(),
                     ))
                     .await;
             }
