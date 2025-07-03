@@ -2,11 +2,23 @@
 
 ## Get Started
 
-<https://wt.yusong.me/>
-
-Open this web page, and starts to talk with others.
-
+Open this web page, and starts to talk with others: <https://wt.yusong.me/>\
 You can also open multiple tabs on the browser to imitate a group of users.
+
+## Table of Contents
+
+<!--toc:start-->
+- [Walkie Talkie](#walkie-talkie)
+  - [Get Started](#get-started)
+  - [Table of Contents](#table-of-contents)
+  - [Deployment](#deployment)
+    - [Simplified Deployment](#simplified-deployment)
+    - [High availability Deployment](#high-availability-deployment)
+  - [OpenAPI](#openapi)
+  - [Dev Environment](#dev-environment)
+  - [Dev Exeprience](#dev-exeprience)
+  - [Roadmap to Production](#roadmap-to-production)
+<!--toc:end-->
 
 ## Deployment
 
@@ -170,3 +182,29 @@ Available recipes:
     spinup    # spin up the services, make it publicly available
     websocket # run backend wt-websocket in debug mode
 ```
+
+## Roadmap to Production
+
+> Frontend or backend features are not included in this section.
+
+high availability:
+
+- the service should be deployed in a k8s cluster by CI/CD.
+- a helm chart should be written to be used in deployment process.
+- the database should be running on the Cloud (e.g. AWS RDS), managed by DBA.
+
+infrastructure as code:
+
+- opentofu state files should be stored remotely (e.g. AWS S3).
+- trigger opentofu only in CI/CD (not locally by typing commands).
+
+release process:
+
+- proper version management of application and OAS is mandatory.
+- test and release process may be something like: dev, stage, production.\
+  (probably with blue/green tests according the naturally split user group).
+
+observability:
+
+- observability integrated into code (e.g. OpenTelemetry).
+- observability deploy in the k8s cluster (e.g. Prometheus, Grafana).
