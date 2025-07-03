@@ -15,13 +15,13 @@ const ws = new WebSocket(VITE_WEBSOCKET_API_ENDPOINT);
 ws.onmessage = (event: MessageEvent<string>): void => {
   const wtm: WalkieTalkieMessage = JSON.parse(event.data);
   console.log("Received:", event.data);
-  addMessage(wtm.payload, false);
+  addMessage(`${wtm.payload} --- FROM: ${wtm.sender}`, false);
 };
 
 ws.onopen = (): void => {
   ws.send(
     JSON.stringify({
-      channel: "ward",
+      channel: "ward_08",
       sender: `nurse_${nurseNumber}`,
       payload: "",
     }),
@@ -37,7 +37,7 @@ const nurseNumber = getRandomInt(1, 1000);
 export function sendMessage(payload: string): void {
   ws.send(
     JSON.stringify({
-      channel: "ward",
+      channel: "ward_08",
       sender: `nurse_${nurseNumber}`,
       payload: payload,
     }),
