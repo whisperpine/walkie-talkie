@@ -1,7 +1,5 @@
 # Walkie Talkie
 
-## Get Started
-
 Open this web page, and starts to talk with others: <https://wt.yusong.me/>\
 You can also open multiple tabs on the browser to imitate a group of users.
 
@@ -9,7 +7,6 @@ You can also open multiple tabs on the browser to imitate a group of users.
 
 <!--toc:start-->
 - [Walkie Talkie](#walkie-talkie)
-  - [Get Started](#get-started)
   - [Table of Contents](#table-of-contents)
   - [Deployment](#deployment)
     - [Simplified Deployment](#simplified-deployment)
@@ -79,7 +76,7 @@ flowchart LR
   subgraph kubernetes
     gateway["ingress /<br>gateway api"]
     wc["wt-websocket<br>(streaming service)"]
-    restapi("wt-rest-api<br>(streaming service)")
+    restapi("wt-rest-api<br>(REST service)")
     wc_pod_a("pod 1")
     wc_pod_b("pod ...")
     restapi_pod_a("pod 1")
@@ -187,24 +184,24 @@ Available recipes:
 
 > Frontend or backend features are not included in this section.
 
-high availability:
+High availability:
 
 - the service should be deployed in a k8s cluster by CI/CD.
 - a helm chart should be written to be used in deployment process.
 - the database should be running on the Cloud (e.g. AWS RDS), managed by DBA.
 
-infrastructure as code:
+Infrastructure as code:
 
 - opentofu state files should be stored remotely (e.g. AWS S3).
 - trigger opentofu only in CI/CD (not locally by typing commands).
 
-release process:
+Release process:
 
 - proper version management of application and OAS is mandatory.
 - test and release process may be something like: dev, stage, production.\
   (probably with blue/green tests according the naturally split user group).
 
-observability:
+Observability:
 
 - observability integrated into code (e.g. OpenTelemetry).
 - observability deploy in the k8s cluster (e.g. Prometheus, Grafana).
