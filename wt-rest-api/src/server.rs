@@ -10,8 +10,8 @@ impl wt_rest_stubs::apis::ErrorHandler<crate::Error> for ServerImpl {}
 ///
 /// ## Panics
 /// This function will panic if:
-/// - The server fails to bind to the specified [`SocketAddr`].
-/// - The server fails to start serving requests ([`axum::serve`]).
+/// - The server fails to bind to the specified [`SocketAddr`](std::net::SocketAddr).
+/// - The server fails to start serving requests ([`axum::serve()`]).
 pub async fn start_server(addr: std::net::SocketAddr) {
     // Init Axum router.
     let server_impl = std::sync::Arc::new(ServerImpl {});
