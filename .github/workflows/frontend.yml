@@ -8,6 +8,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     name: build wt-webapp and deploy on Cloudflare Pages
+    environment:
+      name: wt-webapp
     permissions:
       contents: read
       deployments: write
