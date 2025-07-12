@@ -90,3 +90,16 @@ jobs:
       - name: Run biome lint command
         shell: nix shell nixpkgs#redocly --quiet --command bash {0}
         run: redocly lint ./openapi/openapi.yaml
+
+  gen-up-to-date:
+    runs-on: ubuntu-latest
+    name: check if generated code is update to date
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Generate code from openapi specifications
+        shell: nix develop .#gen --quiet --command bash {0}
+        run: |
+          sh ./scripts/gen-rust-axum.sh
+          sh ./scripts/gen-typescript.sh
+          sh ./scripts/git-status.sh
