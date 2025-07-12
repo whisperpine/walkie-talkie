@@ -56,6 +56,7 @@
       devShells = forEachSupportedSystem (
         { pkgs }:
         {
+          # the default dev environment
           default = pkgs.mkShell {
             packages = with pkgs; [
               # --- others --- #
@@ -87,6 +88,16 @@
                 bun install --cwd wt-webapp
               fi
             '';
+          };
+
+          # this dev environment is used in CI.
+          # nix develop .#gen
+          gen = pkgs.mkShell {
+            packages = with pkgs; [
+              rustToolchain
+              openapi-generator-cli # generate code based on OAS
+              redocly # lint openapi and generate docs
+            ];
           };
         }
       );
