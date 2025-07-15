@@ -1,4 +1,16 @@
 terraform {
+  backend "s3" {
+    bucket                      = var.cloudflare_r2_bucket_name
+    key                         = "walkie-talkie/terraform.tfstate"
+    region                      = "auto"
+    skip_credentials_validation = true
+    skip_metadata_api_check     = true
+    skip_region_validation      = true
+    skip_requesting_account_id  = true
+    skip_s3_checksum            = true
+    use_path_style              = true
+  }
+
   # version constraints docs:
   # https://developer.hashicorp.com/terraform/language/expressions/version-constraints
   required_version = ">= 1.10"

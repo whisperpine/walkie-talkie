@@ -192,7 +192,6 @@ High availability:
 
 Infrastructure as code:
 
-- opentofu state files should be stored remotely (e.g. AWS S3).
 - trigger opentofu only in CI/CD (not locally by typing commands).
 
 Release process:
