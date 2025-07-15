@@ -18,7 +18,7 @@ provider "registry.opentofu.org/carlpett/sops" {
 
 provider "registry.opentofu.org/cloudflare/cloudflare" {
   version     = "5.7.0"
-  constraints = "~> 5.6"
+  constraints = "~> 5.7.0"
   hashes = [
     "h1:ou410X/u62vAJJ9xknEvVOnaspkMHKKOp7qQj48IX+U=",
     "zh:082dc60eb42b5b93852cfbccf15c08124c32a59c64a2bb3ee2e72e9358caa6ef",
@@ -35,7 +35,7 @@ provider "registry.opentofu.org/cloudflare/cloudflare" {
 
 provider "registry.opentofu.org/hashicorp/random" {
   version     = "3.7.2"
-  constraints = "~> 3.7"
+  constraints = "~> 3.7.2"
   hashes = [
     "h1:yHMBbZOIHlXUuBQ8Mhioe0hwmhermuboq2eNNoCJaf8=",
     "zh:2ffeb1058bd7b21a9e15a5301abb863053a2d42dffa3f6cf654a1667e10f4727",

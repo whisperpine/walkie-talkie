@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket                      = var.cloudflare_r2_bucket_name
+    bucket                      = "tf-states"
     key                         = "walkie-talkie/terraform.tfstate"
     region                      = "auto"
     skip_credentials_validation = true
@@ -21,11 +21,11 @@ terraform {
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 5.6"
+      version = "~> 5.7.0"
     }
     random = {
       source  = "hashicorp/random"
-      version = "~> 3.7"
+      version = "~> 3.7.2"
     }
   }
 }

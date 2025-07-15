@@ -26,6 +26,7 @@ API Token minimal permissions:
 
 | Permission type | Permission | Access level |
 | - | - | - |
+| Account | Cloudflare Pages | Edit |
 | Account | Cloudflare Tunnel | Edit |
 | Account | Access: Apps and Policies | Edit |
 | Zone | DNS | Edit |
