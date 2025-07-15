@@ -77,7 +77,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
-      - name: Run biome lint command
+      - name: Run tflint command
         shell: nix shell nixpkgs#tflint --quiet --command bash {0}
         run: tflint --chdir ./infra --recursive
 
@@ -87,7 +87,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
-      - name: Run biome lint command
+      - name: Run redocly lint command
         shell: nix shell nixpkgs#redocly --quiet --command bash {0}
         run: redocly lint ./openapi/openapi.yaml
 
