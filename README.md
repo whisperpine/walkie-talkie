@@ -3,20 +3,6 @@
 Open this web page, and starts to talk with others: <https://wt.yusong.me/>\
 You can also open multiple tabs on the browser to imitate a group of users.
 
-## Table of Contents
-
-<!--toc:start-->
-- [Walkie Talkie](#walkie-talkie)
-  - [Table of Contents](#table-of-contents)
-  - [Deployment](#deployment)
-    - [Simplified Deployment](#simplified-deployment)
-    - [High availability Deployment](#high-availability-deployment)
-  - [OpenAPI](#openapi)
-  - [Dev Environment](#dev-environment)
-  - [Dev Exeprience](#dev-exeprience)
-  - [Roadmap to Production](#roadmap-to-production)
-<!--toc:end-->
-
 ## Deployment
 
 ### Simplified Deployment
@@ -189,10 +175,6 @@ High availability:
 - the service should be deployed in a k8s cluster by CI/CD.
 - a helm chart should be written to be used in deployment process.
 - the database should be running on the Cloud (e.g. AWS RDS), managed by DBA.
-
-Infrastructure as code:
-
-- trigger opentofu only in CI/CD (not locally by typing commands).
 
 Release process:
 
