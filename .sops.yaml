@@ -1,0 +1,10 @@
+stores:
+  yaml:
+    indent: 2
+keys:
+  - &primary age19wm0azdvywzdssmcp74us8ty4pkjmm8am8fnlarkp36eknuyv4ssfaxwc6
+creation_rules:
+  - path_regex: ^infra\/encrypted\.tfvars\.json$
+    key_groups:
+      - age:
+          - *primary
