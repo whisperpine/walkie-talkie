@@ -6,28 +6,33 @@ on:
 jobs:
   tofu-plan:
     runs-on: ubuntu-latest
-    env:
-      AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
     defaults:
       run:
         working-directory: ./infra # Set working directory for apply job.
     steps:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1
-      - run: tofu init
-      - run: tofu validate -no-color
-      - name: OpenTofu plan
+      - name: Run OpenTofu commands
+        env:
+          AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: |
-          tofu plan -out=tfplan -no-color
-          tofu show -no-color tfplan > tfplan.txt # Save human-readable plan output.
+          tofu init
+          tofu validate -no-color
+          tofu plan -no-color -out=tfplan
+      - uses: cachix/install-nix-action@v31
+      - name: Encrypt OpenTofu plan file
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        shell: nix shell nixpkgs#sops --quiet --command bash {0}
+        run: sops encrypt --output tfplan-encrypted tfplan
       - name: Upload plan artifact
         uses: actions/upload-artifact@v4
         with:
-          name: tofu-plan
-          path: ${{ github.workspace }}/infra/tfplan.txt
+          name: tofu-plan-encrypted
+          path: ${{ github.workspace }}/infra/tfplan-encrypted
           if-no-files-found: error
           retention-days: 5
 
@@ -36,17 +41,28 @@ jobs:
     needs: tofu-plan
     environment: infrastructure
     if: github.ref == 'refs/heads/main' # Only run apply on main branch.
-    env:
-      AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
     defaults:
       run:
         working-directory: ./infra # Set working directory for apply job.
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: tofu-plan-encrypted
+          path: ${{ github.workspace }}/infra
+      - uses: cachix/install-nix-action@v31
+      - name: Decrypt OpenTofu plan file
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        shell: nix shell nixpkgs#sops --quiet --command bash {0}
+        run: sops decrypt --output tfplan tfplan-encrypted
       - uses: opentofu/setup-opentofu@v1
-      - run: tofu init
-      - name: OpenTofu Apply
-        run: tofu apply -no-color -auto-approve
+      - name: Run OpenTofu commands
+        env:
+          AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: |
+          tofu init
+          tofu apply -no-color tfplan

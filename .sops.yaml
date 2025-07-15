@@ -10,3 +10,8 @@ creation_rules:
       - age:
           - *yusong
           - *github_actions
+  - path_regex: ^infra\/tfplan$
+    key_groups:
+      - age:
+          - *yusong
+          - *github_actions
