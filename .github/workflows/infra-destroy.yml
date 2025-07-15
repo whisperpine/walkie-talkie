@@ -1,4 +1,4 @@
-name: Create and Update Infrastructure
+name: Destroy Infrastructure
 
 on:
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
         run: |
           tofu init
           tofu validate -no-color
-          tofu plan -no-color -out=tfplan
+          tofu plan -destroy -no-color -out=tfplan
       - uses: cachix/install-nix-action@v31
       - name: Encrypt OpenTofu plan file
         env:
@@ -31,7 +31,7 @@ jobs:
       - name: Upload encrypted plan artifact
         uses: actions/upload-artifact@v4
         with:
-          name: tofu-plan-encrypted
+          name: tofu-plan-destroy-encrypted
           path: ${{ github.workspace }}/infra/tfplan-encrypted
           if-no-files-found: error
           retention-days: 5
@@ -49,7 +49,7 @@ jobs:
       - name: Download encrypted plan artifact
         uses: actions/download-artifact@v4
         with:
-          name: tofu-plan-encrypted
+          name: tofu-plan-destroy-encrypted
           path: ${{ github.workspace }}/infra
       - uses: cachix/install-nix-action@v31
       - name: Decrypt OpenTofu plan file
