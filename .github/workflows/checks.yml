@@ -1,6 +1,7 @@
 name: Check by linters
 
 on:
+  pull_request:
   push:
     branches: ["main"]
 
