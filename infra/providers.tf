@@ -2,6 +2,7 @@ terraform {
   backend "s3" {
     bucket                      = "tf-states"
     key                         = "walkie-talkie/terraform.tfstate"
+    endpoints                   = { s3 = "https://00c0277ef0d444bf5c13b03cf8a33405.r2.cloudflarestorage.com" }
     region                      = "auto"
     skip_credentials_validation = true
     skip_metadata_api_check     = true
