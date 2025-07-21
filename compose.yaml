@@ -1,0 +1,15 @@
+# This file is for local tests, NOT for production.
+
+services:
+  postgres:
+    image: postgres:17.5
+    shm_size: 128mb
+    # volumes: # Deliberately choose temporary storage.
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      PGPORT: ${PGPORT}
+      POSTGRES_DB: ${PGDATABASE}
+    ports:
+      - "${PGPORT}:${PGPORT}"
