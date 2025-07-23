@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":semanticCommitTypeAll(chore)"],
+  "schedule": ["* * 2 * *"],
+  "baseBranchPatterns": ["main"],
+  "dependencyDashboard": false,
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "labels": ["renovate"],
+  "rebaseWhen": "conflicted",
+  "prHourlyLimit": 2,
+  "automerge": false,
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "target/**",
+    "wt-rest-stubs/**",
+    "wt-webapp-sdk/**"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["cargo"],
+      "matchUpdateTypes": ["patch"],
+      "groupName": "patch versions of rust crates",
+      "groupSlug": "cargo-patch"
+    },
+    {
+      "matchManagers": ["cargo"],
+      "matchUpdateTypes": ["minor"],
+      "groupName": "minor versions of rust crates",
+      "groupSlug": "cargo-minor",
+      "matchPackageNames": [
+        "http",
+        "bytes",
+        "uuid",
+        "anyhow",
+        "thiserror",
+        "serde",
+        "serde_json",
+        "tokio"
+      ]
+    },
+    {
+      "matchManagers": ["bun"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "minor and patch versions of bun packages",
+      "groupSlug": "bun-minor-patch"
+    }
+  ]
+}
