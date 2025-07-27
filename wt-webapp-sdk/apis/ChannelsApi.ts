@@ -35,8 +35,11 @@ export class ChannelsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/channels`;
+
         const response = await this.request({
-            path: `/channels`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

@@ -34,8 +34,11 @@ export class EchoApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'text/plain';
 
+
+        let urlPath = `/echo`;
+
         const response = await this.request({
-            path: `/echo`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
