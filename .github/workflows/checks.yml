@@ -55,12 +55,12 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           components: rust-docs
-      # Cache Rust dependencies to speed up builds.
       - name: Cache Rust dependencies
         uses: Swatinem/rust-cache@v2
-      # Run cargo clippy in release mode.
       - name: Run cargo doc
-        run: cargo doc
+        run: |
+          cargo test --doc
+          cargo doc
 
   biome-lint:
     runs-on: ubuntu-latest
