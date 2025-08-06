@@ -63,6 +63,7 @@
               just # just a command runner
               typos # check typo issues
               husky # manage git hooks
+              opentofu # infrastructure as code
 
               # --- frontend --- #
               bun # used as a package manager
