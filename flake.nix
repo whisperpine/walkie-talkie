@@ -81,12 +81,12 @@
             ];
 
             shellHook = ''
+              # make sure npm packages are installed
+              bun install --cwd wt-webapp
               # install git hook managed by husky
               if [ ! -e "./.husky/_" ]; then
                 # set git hooks
                 husky install
-                # make sure npm packages are installed
-                bun install --cwd wt-webapp
               fi
             '';
           };
