@@ -26,9 +26,9 @@ jobs:
         shell: nix shell nixpkgs#markdownlint-cli --quiet --command bash {0}
         run: |
           markdownlint \
-              --ignore ./tt-openapi \
-              --ignore ./target \
-              .
+            --ignore ./tt-openapi \
+            --ignore ./target \
+            .
 
   cargo-clippy:
     runs-on: ubuntu-latest
