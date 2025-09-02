@@ -64,6 +64,7 @@
               typos # check typo issues
               husky # manage git hooks
               opentofu # infrastructure as code
+              cocogitto # conventional commit toolkit
 
               # --- frontend --- #
               bun # used as a package manager
