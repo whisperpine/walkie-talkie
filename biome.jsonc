@@ -1,13 +1,16 @@
 {
   "$schema": "https://biomejs.dev/schemas/latest/schema.json",
-  "files": {
-    "includes": [
-      "./wt-webapp/src/**",
-      "!./wt-webapp/node_modules/**",
-      "!./wt-webapp/dist/**"
-    ]
-  },
+  "files": { "includes": [] },
+  "formatter": { "indentStyle": "space" },
   "linter": {
     // noNonNullAssertion
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   }
 }
