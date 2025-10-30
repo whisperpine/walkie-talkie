@@ -126,7 +126,7 @@ class WebSocketManager {
 
     // Calculate delay with exponential backoff
     const delay = Math.min(
-      this.reconnectInterval * Math.pow(2, this.reconnectAttempts),
+      this.reconnectInterval * 2 ** this.reconnectAttempts,
       this.maxReconnectInterval,
     );
 

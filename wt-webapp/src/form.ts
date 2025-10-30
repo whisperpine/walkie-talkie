@@ -1,5 +1,5 @@
-import { sendMessage } from "./ws.ts";
 import { addMessage } from "./chat.ts";
+import { sendMessage } from "./ws.ts";
 
 // script.ts
 // Select the form and output element with proper typing
@@ -26,12 +26,9 @@ form.addEventListener("submit", (event: Event) => {
 });
 
 const textarea = document.getElementById("message") as HTMLTextAreaElement;
-textarea.addEventListener(
-  "keydown",
-  (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault(); // Prevent adding a newline
-      handle();
-    }
-  },
-);
+textarea.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault(); // Prevent adding a newline
+    handle();
+  }
+});

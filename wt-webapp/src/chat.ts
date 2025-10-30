@@ -22,9 +22,8 @@ function createMessageElement(message: ChatMessage): HTMLDivElement {
 
 // Function to add a message to the chat
 export function addMessage(text: string, isSender: boolean): void {
-  const chatContainer = document.querySelector<HTMLDivElement>(
-    "#chat-container",
-  );
+  const chatContainer =
+    document.querySelector<HTMLDivElement>("#chat-container");
   if (!chatContainer) return;
 
   const message: ChatMessage = { text, isSender };
