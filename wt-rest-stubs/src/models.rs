@@ -7,6 +7,60 @@ use validator::Validate;
 use crate::header;
 use crate::{models, types::*};
 
+#[allow(dead_code)]
+pub fn check_xss_string(v: &str) -> std::result::Result<(), validator::ValidationError> {
+    if ammonia::is_html(v) {
+        std::result::Result::Err(validator::ValidationError::new("xss detected"))
+    } else {
+        std::result::Result::Ok(())
+    }
+}
+
+#[allow(dead_code)]
+pub fn check_xss_vec_string(v: &[String]) -> std::result::Result<(), validator::ValidationError> {
+    if v.iter().any(|i| ammonia::is_html(i)) {
+        std::result::Result::Err(validator::ValidationError::new("xss detected"))
+    } else {
+        std::result::Result::Ok(())
+    }
+}
+
+#[allow(dead_code)]
+pub fn check_xss_map_string(
+    v: &std::collections::HashMap<String, String>,
+) -> std::result::Result<(), validator::ValidationError> {
+    if v.keys().any(|k| ammonia::is_html(k)) || v.values().any(|v| ammonia::is_html(v)) {
+        std::result::Result::Err(validator::ValidationError::new("xss detected"))
+    } else {
+        std::result::Result::Ok(())
+    }
+}
+
+#[allow(dead_code)]
+pub fn check_xss_map_nested<T>(
+    v: &std::collections::HashMap<String, T>,
+) -> std::result::Result<(), validator::ValidationError>
+where
+    T: validator::Validate,
+{
+    if v.keys().any(|k| ammonia::is_html(k)) || v.values().any(|v| v.validate().is_err()) {
+        std::result::Result::Err(validator::ValidationError::new("xss detected"))
+    } else {
+        std::result::Result::Ok(())
+    }
+}
+
+#[allow(dead_code)]
+pub fn check_xss_map<T>(
+    v: &std::collections::HashMap<String, T>,
+) -> std::result::Result<(), validator::ValidationError> {
+    if v.keys().any(|k| ammonia::is_html(k)) {
+        std::result::Result::Err(validator::ValidationError::new("xss detected"))
+    } else {
+        std::result::Result::Ok(())
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct GetUserByIdPathParams {
@@ -20,6 +74,7 @@ pub struct Channel {
     pub channel_id: i32,
 
     #[serde(rename = "channel_name")]
+    #[validate(custom(function = "check_xss_string"))]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub channel_name: Option<String>,
 }
@@ -82,7 +137,7 @@ impl std::str::FromStr for Channel {
                 None => {
                     return std::result::Result::Err(
                         "Missing value while parsing Channel".to_string(),
-                    )
+                    );
                 }
             };
 
@@ -100,7 +155,7 @@ impl std::str::FromStr for Channel {
                     _ => {
                         return std::result::Result::Err(
                             "Unexpected key while parsing Channel".to_string(),
-                        )
+                        );
                     }
                 }
             }
@@ -134,8 +189,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<Channel>> for HeaderValue {
         match HeaderValue::from_str(&hdr_value) {
             std::result::Result::Ok(value) => std::result::Result::Ok(value),
             std::result::Result::Err(e) => std::result::Result::Err(format!(
-                "Invalid header value for Channel - value: {} is invalid {}",
-                hdr_value, e
+                r#"Invalid header value for Channel - value: {hdr_value} is invalid {e}"#
             )),
         }
     }
@@ -153,14 +207,12 @@ impl std::convert::TryFrom<HeaderValue> for header::IntoHeaderValue<Channel> {
                         std::result::Result::Ok(header::IntoHeaderValue(value))
                     }
                     std::result::Result::Err(err) => std::result::Result::Err(format!(
-                        "Unable to convert header value '{}' into Channel - {}",
-                        value, err
+                        r#"Unable to convert header value '{value}' into Channel - {err}"#
                     )),
                 }
             }
             std::result::Result::Err(e) => std::result::Result::Err(format!(
-                "Unable to convert header: {:?} to string: {}",
-                hdr_value, e
+                r#"Unable to convert header: {hdr_value:?} to string: {e}"#
             )),
         }
     }
@@ -173,6 +225,7 @@ pub struct User {
     pub user_id: uuid::Uuid,
 
     #[serde(rename = "user_name")]
+    #[validate(custom(function = "check_xss_string"))]
     pub user_name: String,
 }
 
@@ -227,7 +280,7 @@ impl std::str::FromStr for User {
             let val = match string_iter.next() {
                 Some(x) => x,
                 None => {
-                    return std::result::Result::Err("Missing value while parsing User".to_string())
+                    return std::result::Result::Err("Missing value while parsing User".to_string());
                 }
             };
 
@@ -246,7 +299,7 @@ impl std::str::FromStr for User {
                     _ => {
                         return std::result::Result::Err(
                             "Unexpected key while parsing User".to_string(),
-                        )
+                        );
                     }
                 }
             }
@@ -284,8 +337,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<User>> for HeaderValue {
         match HeaderValue::from_str(&hdr_value) {
             std::result::Result::Ok(value) => std::result::Result::Ok(value),
             std::result::Result::Err(e) => std::result::Result::Err(format!(
-                "Invalid header value for User - value: {} is invalid {}",
-                hdr_value, e
+                r#"Invalid header value for User - value: {hdr_value} is invalid {e}"#
             )),
         }
     }
@@ -302,13 +354,11 @@ impl std::convert::TryFrom<HeaderValue> for header::IntoHeaderValue<User> {
                     std::result::Result::Ok(header::IntoHeaderValue(value))
                 }
                 std::result::Result::Err(err) => std::result::Result::Err(format!(
-                    "Unable to convert header value '{}' into User - {}",
-                    value, err
+                    r#"Unable to convert header value '{value}' into User - {err}"#
                 )),
             },
             std::result::Result::Err(e) => std::result::Result::Err(format!(
-                "Unable to convert header: {:?} to string: {}",
-                hdr_value, e
+                r#"Unable to convert header: {hdr_value:?} to string: {e}"#
             )),
         }
     }

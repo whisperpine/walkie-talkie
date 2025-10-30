@@ -28,6 +28,7 @@ pub trait Channels<E: std::fmt::Debug + Send + Sync + 'static = ()>:
     /// ListChannels - GET /channels
     async fn list_channels(
         &self,
+
         method: &Method,
         host: &Host,
         cookies: &CookieJar,
