@@ -2,7 +2,7 @@
 
 services:
   postgres:
-    image: postgres:17.6
+    image: postgres:17
     shm_size: 128mb
     # volumes: # Deliberately choose temporary storage.
     restart: unless-stopped
