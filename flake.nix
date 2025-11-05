@@ -58,6 +58,7 @@
         {
           # the default dev environment
           default = pkgs.mkShell {
+            # The Nix packages installed in the dev environment.
             packages = with pkgs; [
               # --- others --- #
               just # just a command runner
@@ -81,19 +82,22 @@
               redocly # lint openapi and generate docs
             ];
 
+            # The shell script executed when the environment is activated.
             shellHook = ''
-              # make sure npm packages are installed
+              # Print the last modified date of "flake.lock".
+              stat flake.lock | grep "Modify" |
+                awk '{printf "\"flake.lock\" last modified on: %s", $2}' &&
+                echo " ($((($(date +%s) - $(stat -c %Y flake.lock)) / 86400)) days ago)"
+              # Make sure npm packages are installed.
               bun install --cwd wt-webapp
-              # install git hook managed by husky
+              # Install git hook managed by husky.
               if [ ! -e "./.husky/_" ]; then
-                # set git hooks
                 husky install
               fi
             '';
           };
 
-          # this dev environment is used in CI.
-          # nix develop .#gen
+          # This dev environment is used in CI ("nix develop .#gen").
           gen = pkgs.mkShell {
             packages = with pkgs; [
               rustToolchain
