@@ -1,6 +1,10 @@
-# ======================================
+# list all available subcommands
+_default:
+  @just --list
+
+# --------------------------------------
 # OpenAPI
-# ======================================
+# --------------------------------------
 
 # lint OpenAPI Specifications
 lint:
@@ -25,9 +29,9 @@ gen-axum:
 gen-ts:
   sh ./scripts/gen-typescript.sh
 
-# ======================================
+# --------------------------------------
 # Frontend
-# ======================================
+# --------------------------------------
 
 # run frontend wt-webapp in debug mode
 front:
@@ -39,9 +43,9 @@ preview:
   bun run --cwd wt-webapp preview
 
 
-# ======================================
+# --------------------------------------
 # Backend
-# ======================================
+# --------------------------------------
 
 # run backend wt-websocket in debug mode
 websocket:
@@ -68,9 +72,9 @@ build-api:
     .
 
 
-# ======================================
+# --------------------------------------
 # Deployment
-# ======================================
+# --------------------------------------
 
 # spin up the services, make it publicly available
 spinup:
@@ -78,8 +82,8 @@ spinup:
     --file ./prod.compose.yaml \
     up -d
 
-# spin down the services, make it publicly unavailable
-spindown:
+# tear down the services, make it publicly unavailable
+teardown:
   docker compose \
     --file ./prod.compose.yaml \
     down
