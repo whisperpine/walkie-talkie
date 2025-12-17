@@ -60,9 +60,10 @@
           default = pkgs.mkShellNoCC {
             # The Nix packages installed in the dev environment.
             packages = with pkgs; [
-              # --- others --- #
+              # --- common --- #
               just # just a command runner
               typos # check typo issues
+              sops # simple tool for managing secrets
               husky # manage git hooks
               opentofu # infrastructure as code
               cocogitto # conventional commit toolkit
