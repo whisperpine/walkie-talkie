@@ -12,7 +12,8 @@ script, then run `just gen-axum` command to generate this package again.
 
 ## Feature Flags
 
-The generated library has a few optional features that can be activated through Cargo.
+The generated library has a few optional features
+that can be activated through Cargo.
 
 - `server`
   - This is enabled by default and creates the basic skeleton of a server.
