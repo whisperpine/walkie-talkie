@@ -2,6 +2,11 @@ apis/ChannelsApi.ts
 apis/EchoApi.ts
 apis/UsersApi.ts
 apis/index.ts
+docs/Channel.md
+docs/ChannelsApi.md
+docs/EchoApi.md
+docs/User.md
+docs/UsersApi.md
 index.ts
 models/Channel.ts
 models/User.ts
