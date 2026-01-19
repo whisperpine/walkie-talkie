@@ -13,7 +13,7 @@ terraform {
     use_lockfile                = true
   }
 
-  # version constraints docs:
+  # Version constraints docs:
   # https://developer.hashicorp.com/terraform/language/expressions/version-constraints
   required_version = ">= 1.10"
   required_providers {
@@ -28,12 +28,12 @@ terraform {
   }
 }
 
-# cloudflare/cloudflare provider docs:
+# Provider "carlpett/sops" docs:
+# https://registry.terraform.io/providers/carlpett/sops/latest/docs
+provider "sops" {}
+
+# Provider "cloudflare/cloudflare" docs:
 # https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 provider "cloudflare" {
   api_token = local.cloudflare_token
 }
-
-# carlpett/sops provider docs: 
-# https://registry.terraform.io/providers/carlpett/sops/latest/docs
-provider "sops" {}

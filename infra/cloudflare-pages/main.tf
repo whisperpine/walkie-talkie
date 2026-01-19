@@ -8,14 +8,16 @@ terraform {
   }
 }
 
-# Create a Cloudflare Pages project
+# Create a Cloudflare Pages project.
+# https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/pages_project
 resource "cloudflare_pages_project" "default" {
   name              = var.pages_project_name
   account_id        = var.cloudflare_account_id
   production_branch = var.pages_production_branch
 }
 
-# Create a CNAME record to point the custom domain to the Pages project
+# Create a CNAME record to point the custom domain to the Pages project.
+# https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record
 resource "cloudflare_dns_record" "default" {
   zone_id = var.cloudflare_zone_id
   name    = var.pages_custom_domain
@@ -26,7 +28,8 @@ resource "cloudflare_dns_record" "default" {
   ttl     = 1 # setting to 1 means automatic
 }
 
-# Associate the custom domain with the Pages project
+# Associate the custom domain with the Pages project.
+# https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/pages_domain
 resource "cloudflare_pages_domain" "default" {
   name         = var.pages_custom_domain
   account_id   = var.cloudflare_account_id

@@ -1,4 +1,3 @@
-# sops_file data docs:
 # https://registry.terraform.io/providers/carlpett/sops/latest/docs/data-sources/file
 data "sops_file" "default" {
   source_file = "encrypted.${terraform.workspace}.json"
@@ -14,6 +13,7 @@ locals {
   dns_record_prefix_wtapi = data.sops_file.default.data["dns_record_prefix_wtapi"]
 }
 
+# Create a Cloudflare Tunnel and add correlated DNS records.
 module "cloudflare_tunnel" {
   source                  = "./cloudflare-tunnel"
   cloudflare_zone         = local.cloudflare_zone
@@ -24,6 +24,7 @@ module "cloudflare_tunnel" {
   dns_record_prefix_wtapi = local.dns_record_prefix_wtapi
 }
 
+# Create a Cloudflare Pages project and add a custom domain.
 module "cloudflare_pages" {
   source                = "./cloudflare-pages"
   cloudflare_zone_id    = local.cloudflare_zone_id
