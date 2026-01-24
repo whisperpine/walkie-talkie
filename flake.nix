@@ -64,9 +64,9 @@
               just # just a command runner
               typos # check typo issues
               sops # simple tool for managing secrets
-              husky # manage git hooks
               opentofu # infrastructure as code
               cocogitto # conventional commit toolkit
+              prek # better pre-commit
 
               # --- frontend --- #
               bun # used as a package manager
@@ -91,10 +91,8 @@
                 echo " ($((($(date +%s) - $(git log -1 --format="%ct" -- flake.lock)) / 86400)) days ago)"
               # Make sure npm packages are installed.
               bun install --cwd wt-webapp
-              # Install git hook managed by husky.
-              if [ ! -e "./.husky/_" ]; then
-                husky install
-              fi
+              # Install git hooks managed by prek.
+              prek install --quiet
             '';
           };
 
