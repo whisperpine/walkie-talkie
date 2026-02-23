@@ -1,10 +1,20 @@
 // #![cfg_attr(debug_assertions, allow(unused))]
 
+#![cfg_attr(
+    not(debug_assertions),
+    deny(warnings, missing_docs),
+    deny(clippy::todo, clippy::unwrap_used)
+)]
+#![cfg_attr(
+    not(any(test, debug_assertions)),
+    deny(clippy::print_stdout, clippy::dbg_macro)
+)]
+
 use axum::extract::ws::{WebSocket, WebSocketUpgrade};
 use futures::{sink::SinkExt, stream::StreamExt};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
-use tokio::sync::{broadcast, Mutex};
+use tokio::sync::{Mutex, broadcast};
 use tracing::info;
 
 #[tokio::main]
@@ -54,6 +64,7 @@ async fn websocket_handler(
     ws.on_upgrade(|socket| handle_socket(socket, state))
 }
 
+#[expect(clippy::map_unwrap_or)]
 async fn handle_socket(mut socket: WebSocket, state: AppState) {
     // Receive initial message to determine channel and sender
     if let Some(Ok(msg)) = socket.recv().await
