@@ -5,9 +5,6 @@ use wt_rest_stubs::models;
 
 #[async_trait::async_trait]
 impl wt_rest_stubs::apis::users::Users<crate::Error> for crate::ServerImpl {
-    /// Get user information by ID.
-    ///
-    /// GetUserById - GET /users/{user_id}
     async fn get_user_by_id(
         &self,
         _method: &Method,
@@ -29,9 +26,6 @@ impl wt_rest_stubs::apis::users::Users<crate::Error> for crate::ServerImpl {
         Ok(GetUserByIdResponse::Status200_SuccessfulResponse(mock_user))
     }
 
-    /// List all users.
-    ///
-    /// ListUsers - GET /users
     async fn list_users(
         &self,
         _method: &Method,

@@ -6,9 +6,6 @@ use wt_rest_stubs::models;
 /// Channels
 #[async_trait::async_trait]
 impl wt_rest_stubs::apis::channels::Channels<crate::Error> for crate::ServerImpl {
-    /// List all channels.
-    ///
-    /// ListChannels - GET /channels
     async fn list_channels(
         &self,
         _method: &Method,

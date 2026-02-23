@@ -1,4 +1,6 @@
-// #![cfg_attr(debug_assertions, allow(unused))]
+//! # wt-websocket
+//!
+//! This crate provides the websocket server functionality.
 
 #![cfg_attr(
     not(debug_assertions),
@@ -100,8 +102,7 @@ async fn handle_socket(mut socket: WebSocket, state: AppState) {
                     sender: "system".to_owned(),
                     payload: format!("Connected to channel: {channel_name}"),
                 })
-                .inspect_err(|e| tracing::error!("{e}"))
-                .unwrap()
+                .unwrap_or_else(|e| panic!("Error: {e}."))
                 .into(),
             ))
             .await;
@@ -134,8 +135,7 @@ async fn handle_socket(mut socket: WebSocket, state: AppState) {
                 let _ = ws_sink
                     .send(axum::extract::ws::Message::Text(
                         serde_json::to_string(&message)
-                            .inspect_err(|e| tracing::error!("{e}"))
-                            .unwrap()
+                            .unwrap_or_else(|e| panic!("Error: {e}"))
                             .into(),
                     ))
                     .await;

@@ -1,6 +1,6 @@
 //! # wt-rest-api
 //!
-//! This crate provides the core HTTP server functionality for the tt project.
+//! This crate provides the core HTTP server functionality.
 
 #![cfg_attr(
     not(debug_assertions),
