@@ -23,7 +23,7 @@ data "cloudflare_zero_trust_tunnel_cloudflared_token" "default" {
 # https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record
 resource "cloudflare_dns_record" "wtws" {
   zone_id = var.cloudflare_zone_id
-  name    = var.dns_record_prefix_wtws
+  name    = "${var.dns_record_prefix_wtws}.${var.cloudflare_zone}"
   content = "${cloudflare_zero_trust_tunnel_cloudflared.default.id}.cfargotunnel.com"
   comment = "walkie-talkie's websocket api endpoint"
   type    = "CNAME"
@@ -34,7 +34,7 @@ resource "cloudflare_dns_record" "wtws" {
 # https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record
 resource "cloudflare_dns_record" "wtapi" {
   zone_id = var.cloudflare_zone_id
-  name    = var.dns_record_prefix_wtapi
+  name    = "${var.dns_record_prefix_wtapi}.${var.cloudflare_zone}"
   content = "${cloudflare_zero_trust_tunnel_cloudflared.default.id}.cfargotunnel.com"
   comment = "walkie-talkie's REST api endpoint"
   type    = "CNAME"
@@ -49,14 +49,14 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "default" {
   config = {
     ingress = [
       {
-        hostname = "${cloudflare_dns_record.wtws.name}.${var.cloudflare_zone}"
+        hostname = cloudflare_dns_record.wtws.name
         service  = "ws://wt-websocket:3000"
         origin_request = {
           no_tls_verify = true
         }
       },
       {
-        hostname = "${cloudflare_dns_record.wtapi.name}.${var.cloudflare_zone}"
+        hostname = cloudflare_dns_record.wtapi.name
         service  = "http://wt-rest-api:8080"
         origin_request = {
           no_tls_verify = true
