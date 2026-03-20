@@ -37,6 +37,8 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/wt-websocket:latest
             ghcr.io/${{ github.repository_owner }}/wt-websocket:${{ steps.vars.outputs.sha_short }}
           platforms: linux/amd64,linux/arm64
+          cache-to: type=gha,mode=max
+          cache-from: type=gha
 
   wt-rest-api:
     name: build wt-rest-api and push to ghcr
@@ -68,6 +70,8 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/wt-rest-api:latest
             ghcr.io/${{ github.repository_owner }}/wt-rest-api:${{ steps.vars.outputs.sha_short }}
           platforms: linux/amd64,linux/arm64
+          cache-to: type=gha,mode=max
+          cache-from: type=gha
 
   scan-wt-websocket:
     name: scan CVE on the image
