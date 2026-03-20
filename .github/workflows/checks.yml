@@ -72,8 +72,8 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: Run cargo doc
         run: |
+          RUSTDOCFLAGS="-D warnings" cargo doc --no-deps
           cargo test --doc
-          cargo doc
 
   biome-check:
     runs-on: ubuntu-latest
