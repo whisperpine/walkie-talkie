@@ -15,4 +15,5 @@ API Token minimal permissions:
 | Permission type | Permission | Access level |
 | - | - | - |
 | Account | Cloudflare Pages | Edit |
+| User | Memberships | Read |
 | Zone | DNS | Edit |
