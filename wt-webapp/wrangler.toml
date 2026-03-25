@@ -1,0 +1,23 @@
+# Refer to Cloudflare Docs:
+# https://developers.cloudflare.com/workers/configuration/
+
+# The name of your Worker.
+name = "walkie-talkie"
+
+# Used to determine which version of the Workers runtime is used.
+compatibility_date = "2026-03-25"
+
+# Disables "https://NAME.SUBDOMAIN.workers.dev".
+workers_dev = false
+# Disables "https://VERSION_PREFIX-NAME.SUBDOMAIN.workers.dev".
+preview_urls = false
+
+[assets]
+directory = "dist/"
+# When not found, serve the contents of the "index.html" file.
+not_found_handling = "single-page-application"
+
+# Configures a custom domain.
+[[routes]]
+pattern = "wt.yusong.me"
+custom_domain = true
