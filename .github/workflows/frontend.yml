@@ -22,9 +22,12 @@ jobs:
         run: |
           bun install --cwd wt-webapp
           bun run --cwd wt-webapp build
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
       - name: Deploy on Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES }}
-        shell: nix shell nixpkgs#wrangler --quiet --command bash {0}
         run: |
-          wrangler pages deploy ./wt-webapp/dist/ --project-name=walkie-talkie
+          npx wrangler --version
+          npx wrangler pages deploy ./wt-webapp/dist/ --project-name=walkie-talkie
