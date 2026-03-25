@@ -1,6 +1,9 @@
 # Direnv
 /.direnv
 
+# Wrangler
+.wrangler
+
 # Cargo output
 /target
 
