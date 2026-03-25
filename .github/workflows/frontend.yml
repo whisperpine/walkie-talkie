@@ -14,20 +14,21 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    defaults:
+      run:
+        working-directory: ./wt-webapp
     steps:
       - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
       - name: Build frontend app
         shell: nix shell nixpkgs#bun --quiet --command bash {0}
         run: |
-          bun install --cwd wt-webapp
-          bun run --cwd wt-webapp build
+          bun install
+          bun run build
       - uses: actions/setup-node@v6
         with:
           node-version: 24
-      - name: Deploy on Cloudflare Pages
+      - name: Deploy on Cloudflare Workers
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES }}
-        run: |
-          npx wrangler --version
-          npx wrangler pages deploy ./wt-webapp/dist/ --project-name=walkie-talkie
+        run: npx wrangler deploy
