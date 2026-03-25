@@ -11,7 +11,6 @@ jobs:
     name: build wt-webapp and deploy on Cloudflare Pages
     environment:
       name: wt-webapp
-      url: ${{ steps.deployment.outputs.deployment-url }}
     permissions:
       contents: read
       deployments: write
@@ -24,9 +23,8 @@ jobs:
           bun install --cwd wt-webapp
           bun run --cwd wt-webapp build
       - name: Deploy on Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        id: deployment
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES }}
-          command: |
-            pages deploy ./wt-webapp/dist/ --project-name=walkie-talkie
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES }}
+        shell: nix shell nixpkgs#wrangler --quiet --command bash {0}
+        run: |
+          wrangler pages deploy ./wt-webapp/dist/ --project-name=walkie-talkie
