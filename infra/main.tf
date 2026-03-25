@@ -24,11 +24,11 @@ module "cloudflare_tunnel" {
   dns_record_prefix_wtapi = local.dns_record_prefix_wtapi
 }
 
-# Create a Cloudflare Pages project and add a custom domain.
-module "cloudflare_pages" {
-  source                = "./cloudflare-pages"
-  cloudflare_zone_id    = local.cloudflare_zone_id
-  cloudflare_account_id = local.cloudflare_account_id
-  pages_project_name    = "walkie-talkie"
-  pages_custom_domain   = "wt.${local.cloudflare_zone}"
-}
+# # Create a Cloudflare Pages project and add a custom domain.
+# module "cloudflare_pages" {
+#   source                = "./cloudflare-pages"
+#   cloudflare_zone_id    = local.cloudflare_zone_id
+#   cloudflare_account_id = local.cloudflare_account_id
+#   pages_project_name    = "walkie-talkie"
+#   pages_custom_domain   = "wt.${local.cloudflare_zone}"
+# }
