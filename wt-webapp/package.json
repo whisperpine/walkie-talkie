@@ -12,8 +12,8 @@
     "wt-webapp-sdk": "file:../wt-webapp-sdk/"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.11",
-    "typescript": "~5.9.0",
-    "vite": "^7.0.0"
+    "@tailwindcss/vite": "^4.2.2",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.2"
   }
 }
