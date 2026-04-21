@@ -12,9 +12,9 @@
     "wt-webapp-sdk": "file:../wt-webapp-sdk/"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.2.2",
-    "typescript": "~6.0.2",
-    "vite": "^8.0.2",
-    "wrangler": "^4.77.0"
+    "@tailwindcss/vite": "^4.2.3",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.9",
+    "wrangler": "^4.84.0"
   }
 }

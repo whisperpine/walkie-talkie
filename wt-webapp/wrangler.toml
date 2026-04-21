@@ -5,12 +5,18 @@
 name = "walkie-talkie"
 
 # Used to determine which version of the Workers runtime is used.
-compatibility_date = "2026-03-25"
+compatibility_date = "2026-04-21"
 
 # Disables "https://NAME.SUBDOMAIN.workers.dev".
 workers_dev = false
 # Disables "https://VERSION_PREFIX-NAME.SUBDOMAIN.workers.dev".
 preview_urls = false
+
+[observability]
+enabled = true
+head_sampling_rate = 1.0
+logs = { enabled = true }
+traces = { enabled = true }
 
 [assets]
 directory = "dist/"
