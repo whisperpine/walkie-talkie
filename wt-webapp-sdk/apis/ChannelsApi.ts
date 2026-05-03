@@ -28,9 +28,9 @@ import {
 export class ChannelsApi extends runtime.BaseAPI {
 
     /**
-     * List all channels
+     * Creates request options for listChannels without sending the request
      */
-    async listChannelsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Channel>>> {
+    async listChannelsRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -38,12 +38,20 @@ export class ChannelsApi extends runtime.BaseAPI {
 
         let urlPath = `/channels`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List all channels
+     */
+    async listChannelsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Channel>>> {
+        const requestOptions = await this.listChannelsRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ChannelFromJSON));
     }

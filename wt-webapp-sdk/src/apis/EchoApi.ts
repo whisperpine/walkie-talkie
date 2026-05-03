@@ -20,7 +20,7 @@ export interface EchoBackRequest {
 }
 
 /**
- * 
+ *
  */
 export class EchoApi extends runtime.BaseAPI {
 

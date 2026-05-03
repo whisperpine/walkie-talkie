@@ -25,9 +25,9 @@ export interface EchoBackRequest {
 export class EchoApi extends runtime.BaseAPI {
 
     /**
-     * Echo the request body
+     * Creates request options for echoBack without sending the request
      */
-    async echoBackRaw(requestParameters: EchoBackRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+    async echoBackRequestOpts(requestParameters: EchoBackRequest): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -37,13 +37,21 @@ export class EchoApi extends runtime.BaseAPI {
 
         let urlPath = `/echo`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters['body'] as any,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Echo the request body
+     */
+    async echoBackRaw(requestParameters: EchoBackRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+        const requestOptions = await this.echoBackRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         if (this.isJsonMime(response.headers.get('content-type'))) {
             return new runtime.JSONApiResponse<string>(response);

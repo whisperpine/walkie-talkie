@@ -14,19 +14,19 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface Channel
  */
 export interface Channel {
     /**
-     * 
+     *
      * @type {number}
      * @memberof Channel
      */
     channelId: number;
     /**
-     * 
+     *
      * @type {string}
      * @memberof Channel
      */
@@ -50,7 +50,7 @@ export function ChannelFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
         return json;
     }
     return {
-        
+
         'channelId': json['channel_id'],
         'channelName': json['channel_name'] == null ? undefined : json['channel_name'],
     };
@@ -66,7 +66,7 @@ export function ChannelToJSONTyped(value?: Channel | null, ignoreDiscriminator: 
     }
 
     return {
-        
+
         'channel_id': value['channelId'],
         'channel_name': value['channelName'],
     };

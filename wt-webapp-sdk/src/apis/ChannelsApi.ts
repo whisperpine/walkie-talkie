@@ -23,7 +23,7 @@ import {
 } from '../models/index';
 
 /**
- * 
+ *
  */
 export class ChannelsApi extends runtime.BaseAPI {
 

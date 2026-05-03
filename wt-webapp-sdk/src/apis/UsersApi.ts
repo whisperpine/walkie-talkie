@@ -27,7 +27,7 @@ export interface GetUserByIdRequest {
 }
 
 /**
- * 
+ *
  */
 export class UsersApi extends runtime.BaseAPI {
 

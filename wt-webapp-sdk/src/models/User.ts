@@ -14,19 +14,19 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface User
  */
 export interface User {
     /**
-     * 
+     *
      * @type {string}
      * @memberof User
      */
     userId: string;
     /**
-     * 
+     *
      * @type {string}
      * @memberof User
      */
@@ -51,7 +51,7 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
         return json;
     }
     return {
-        
+
         'userId': json['user_id'],
         'userName': json['user_name'],
     };
@@ -67,7 +67,7 @@ export function UserToJSONTyped(value?: User | null, ignoreDiscriminator: boolea
     }
 
     return {
-        
+
         'user_id': value['userId'],
         'user_name': value['userName'],
     };
