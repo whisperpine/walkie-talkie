@@ -61,6 +61,7 @@
             # The Nix packages installed in the dev environment.
             packages = with pkgs; [
               # --- common --- #
+              rumdl # markdown linter
               just # just a command runner
               typos # check typo issues
               sops # simple tool for managing secrets
