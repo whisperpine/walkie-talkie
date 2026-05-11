@@ -82,7 +82,7 @@ flowchart LR
   %% style db stroke-dasharray: 5
 ```
 
-### High availability Deployment
+### High Availability Deployment
 
 This approach should be used in production (for reliability and scalability).
 
