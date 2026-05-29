@@ -12,15 +12,12 @@
  * Do not edit the class manually.
  */
 
-
 import * as runtime from '../runtime';
-import type {
-  Channel,
-} from '../models/index';
 import {
+    type Channel,
     ChannelFromJSON,
     ChannelToJSON,
-} from '../models/index';
+} from '../models/Channel';
 
 /**
  * 

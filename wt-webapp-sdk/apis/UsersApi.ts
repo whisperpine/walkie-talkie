@@ -12,15 +12,12 @@
  * Do not edit the class manually.
  */
 
-
 import * as runtime from '../runtime';
-import type {
-  User,
-} from '../models/index';
 import {
+    type User,
     UserFromJSON,
     UserToJSON,
-} from '../models/index';
+} from '../models/User';
 
 export interface GetUserByIdRequest {
     userId: string;
@@ -48,7 +45,7 @@ export class UsersApi extends runtime.BaseAPI {
 
 
         let urlPath = `/users/{user_id}`;
-        urlPath = urlPath.replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters['userId'])));
+        urlPath = urlPath.replace('{user_id}', encodeURIComponent(String(requestParameters['userId'])));
 
         return {
             path: urlPath,
