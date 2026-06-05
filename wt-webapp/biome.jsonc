@@ -1,12 +1,52 @@
 {
   "$schema": "https://biomejs.dev/schemas/latest/schema.json",
   "root": false,
-  "formatter": { "indentStyle": "space" },
   "files": {
     "includes": [
-      "./src/**",
-      "!./node_modules",
-      "!./dist"
+      "./**/*.ts",
+      "./**/*.js",
+      "./**/*.html",
+      "!!/nix/store",
+      "!!**/node_modules",
+      "!!**/dist"
     ]
+  },
+  "formatter": {
+    "indentStyle": "space"
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "html": {
+    "parser": {
+      "interpolation": true
+    },
+    "formatter": {
+      "enabled": true,
+      "selfCloseVoidElements": "always",
+      "whitespaceSensitivity": "ignore"
+    }
+  },
+  "linter": {
+    "rules": {
+      "style": {
+        "useNamingConvention": {
+          "level": "warn",
+          "options": {
+            "strictCase": true,
+            "conventions": [
+              {
+                "selector": { "kind": "function" },
+                "formats": ["camelCase"]
+              }
+            ]
+          }
+        },
+        "useGraphqlNamingConvention": "warn",
+        "useFilenamingConvention": "error"
+      }
+    }
   }
 }
