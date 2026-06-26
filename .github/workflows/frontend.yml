@@ -17,7 +17,7 @@ jobs:
       run:
         working-directory: ./wt-webapp
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: cachix/install-nix-action@v31
       - name: Build frontend app
         env:
