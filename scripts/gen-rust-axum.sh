@@ -25,9 +25,6 @@ openapi-generator-cli generate \
 ## Learn more about "openapi-generator-cli generate" command.
 # openapi-generator-cli help generate
 
-# Format to generated code by cargo-fmt.
-cargo fmt --package $package_name
-
 lints='
 [lints.rust]
 mismatched_lifetime_syntaxes = "allow"
@@ -43,3 +40,7 @@ uninlined_format_args = "allow"
 
 # Add customized lints to eliminate warnings.
 echo "$lints" >>./wt-rest-stubs/Cargo.toml
+
+# Format to generated code by cargo-fmt.
+cargo fmt --package $package_name
+cargo fmt
