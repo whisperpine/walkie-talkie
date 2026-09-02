@@ -21,14 +21,10 @@ import { mapValues } from '../runtime';
 export interface Channel {
     /**
      * 
-     * @type {number}
-     * @memberof Channel
      */
     channelId: number;
     /**
      * 
-     * @type {string}
-     * @memberof Channel
      */
     channelName?: string;
 }
@@ -37,7 +33,7 @@ export interface Channel {
  * Check if a given object implements the Channel interface.
  */
 export function instanceOfChannel(value: object): value is Channel {
-    if (!('channelId' in value) || value['channelId'] === undefined) return false;
+    if ((!('channelId' in (value as Record<string, any>)) && !('channel_id' in (value as Record<string, any>))) || ((value as Record<string, any>)['channelId'] === undefined && (value as Record<string, any>)['channel_id'] === undefined)) return false;
     return true;
 }
 

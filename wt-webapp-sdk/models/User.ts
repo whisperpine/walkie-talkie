@@ -21,14 +21,10 @@ import { mapValues } from '../runtime';
 export interface User {
     /**
      * 
-     * @type {string}
-     * @memberof User
      */
     userId: string;
     /**
      * 
-     * @type {string}
-     * @memberof User
      */
     userName: string;
 }
@@ -37,8 +33,8 @@ export interface User {
  * Check if a given object implements the User interface.
  */
 export function instanceOfUser(value: object): value is User {
-    if (!('userId' in value) || value['userId'] === undefined) return false;
-    if (!('userName' in value) || value['userName'] === undefined) return false;
+    if ((!('userId' in (value as Record<string, any>)) && !('user_id' in (value as Record<string, any>))) || ((value as Record<string, any>)['userId'] === undefined && (value as Record<string, any>)['user_id'] === undefined)) return false;
+    if ((!('userName' in (value as Record<string, any>)) && !('user_name' in (value as Record<string, any>))) || ((value as Record<string, any>)['userName'] === undefined && (value as Record<string, any>)['user_name'] === undefined)) return false;
     return true;
 }
 

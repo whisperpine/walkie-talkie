@@ -20,6 +20,9 @@ import {
 } from '../models/User';
 
 export interface GetUserByIdRequest {
+    /**
+     * 
+     */
     userId: string;
 }
 
