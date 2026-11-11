@@ -51,6 +51,13 @@ entry = "biome check --error-on-warnings --no-errors-on-unmatched"
 pass_filenames = false
 
 [[repos.hooks]]
+id = "bun-fmt"
+name = "check formatting by bun fmt"
+language = "system"
+entry = "bun fmt --check"
+pass_filenames = false
+
+[[repos.hooks]]
 id = "commit-msg"
 name = "check commit message"
 language = "system"
