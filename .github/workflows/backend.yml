@@ -6,14 +6,23 @@ on:
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   wt-websocket:
     name: build wt-websocket and push to ghcr
     runs-on: ubuntu-latest
     permissions:
-      packages: write
+      packages: write # required to manage container images in GHCR
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Set up QEMU for multi-platform builds
         uses: docker/setup-qemu-action@v4
       - name: Set up Docker Buildx
@@ -44,9 +53,11 @@ jobs:
     name: build wt-rest-api and push to ghcr
     runs-on: ubuntu-latest
     permissions:
-      packages: write
+      packages: write # required to manage container images in GHCR
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Set up QEMU for multi-platform builds
         uses: docker/setup-qemu-action@v4
       - name: Set up Docker Buildx
@@ -78,18 +89,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: wt-websocket
     permissions:
-      security-events: write
+      security-events: write # required to upload SARIF results to the Security tab
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Set outputs
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
       - uses: cachix/install-nix-action@v31
       - name: Run Trivy vulnerability scanner
-        shell: nix shell nixpkgs#trivy --quiet --command bash {0}
+        shell: nix shell --inputs-from . nixpkgs#trivy --quiet --command bash {0}
+        env:
+          IMAGE: ghcr.io/${{ github.repository_owner }}/wt-websocket:${{ steps.vars.outputs.sha_short }}
         run: |
           trivy --quiet image \
-            ghcr.io/${{ github.repository_owner }}/wt-websocket:${{ steps.vars.outputs.sha_short }} \
+            "$IMAGE" \
             --output trivy-image-results.sarif \
             --severity CRITICAL,HIGH,MEDIUM \
             --format sarif \
@@ -106,18 +121,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: wt-rest-api
     permissions:
-      security-events: write
+      security-events: write # required to upload SARIF results to the Security tab
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Set outputs
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
       - uses: cachix/install-nix-action@v31
       - name: Run Trivy vulnerability scanner
-        shell: nix shell nixpkgs#trivy --quiet --command bash {0}
+        shell: nix shell --inputs-from . nixpkgs#trivy --quiet --command bash {0}
+        env:
+          IMAGE: ghcr.io/${{ github.repository_owner }}/wt-rest-api:${{ steps.vars.outputs.sha_short }}
         run: |
           trivy --quiet image \
-            ghcr.io/${{ github.repository_owner }}/wt-rest-api:${{ steps.vars.outputs.sha_short }} \
+            "$IMAGE" \
             --output trivy-image-results.sarif \
             --severity CRITICAL,HIGH,MEDIUM \
             --format sarif \
