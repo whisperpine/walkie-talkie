@@ -66,6 +66,7 @@
               sops # simple tool for managing secrets
               opentofu # infrastructure as code
               cocogitto # conventional commit toolkit
+              zizmor # lint github actions
               prek # better pre-commit
 
               # --- frontend --- #
